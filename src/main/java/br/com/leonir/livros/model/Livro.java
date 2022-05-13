@@ -20,27 +20,32 @@ public class Livro {
 	
 	@NotNull
 	@NotBlank
+	@Size(min= 3, max = 25, message = "O título deve ter entre 3 a 25 caracteres")
 	private String titulo;
 	
 	@NotNull
 	@NotBlank
+	@Size(min= 3, max = 25, message = "O nome da editora deve ter entre 3 a 25 caracteres")
 	private String editora;
 	
 	@NotNull
 	@NotBlank	
-	@Size(min= 3, max = 25, message = "Quantidade de caracteres fora do limite")
+	@Size(min= 3, max = 25, message = "O nome do autor deve ter entre 3 a 25 caracteres")
 	private String autor;
 	
 	@NotNull
 	@NotBlank
+	@Size(min= 3, max = 25, message = "O nome da categoria deve ter entre 3 a 25 caracteres")
 	private String categoria;
 	
 	@NotNull
-	@Min(value = 1500, message = "Valor mínimo é 1500 ")
+	@Min(value = 1901, message = "O ano de publicação não pode ser antes de 1901")
+	@Max(value = 2022, message = "O ano de publicação não pode passar de 2022")
 	private int ano;
 	
 	@NotNull
-	@Min(value=1, message = "A quantidade mínima é 1")
+	@Min(value=1, message = "Deve ter pelo menos 1 exemplar")
+	@Max(value = 30, message = "A quantidade máxima permitida é de 30 exemplares")
 	private int quantidade;
 	
 	public Livro(String titulo, String editora, String autor, String categoria, int ano, int quantidade) {

@@ -56,7 +56,7 @@
 							<td><span th:text="${livro.quantidade}"> Quantidade </span></td>
 							<td><a class="btn btn-outline-danger btn-sm"
 								th:href="@{/livros/apagar/{id}(id=${livro.id})}"
-								th:data-confirm-delete="|Você gostaria de apagar ${livro.titulo}?|"
+								th:data-confirm-delete="|Você gostaria de apagar o livro ${livro.titulo}?|"
 								onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
 									Apagar </a></td>
 							<td><a class="btn btn-outline-primary btn-sm"
