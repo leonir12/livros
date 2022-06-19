@@ -1,13 +1,15 @@
 package br.com.leonir.livros.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -48,7 +50,13 @@ public class Livro {
 	@Max(value = 30, message = "A quantidade máxima permitida é de 30 exemplares")
 	private int quantidade;
 	
-	public Livro(String titulo, String editora, String autor, String categoria, int ano, int quantidade) {
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "livro", 
+			  fetch = FetchType.EAGER)
+	private Aluno aluno;
+	
+	
+
+	public Livro(String titulo, String editora, String autor, String categoria, int ano, int quantidade,Aluno aluno) {
 		super();
 		this.titulo = titulo;
 		this.editora = editora;
@@ -56,6 +64,7 @@ public class Livro {
 		this.categoria = categoria;
 		this.ano = ano;
 		this.quantidade = quantidade;
+		this.aluno = aluno;
 	}
 	
 	public Livro() {
@@ -103,6 +112,12 @@ public class Livro {
 	}
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
+	}
+	public Aluno getAluno() {
+		return aluno;
+	}
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 	
 	
