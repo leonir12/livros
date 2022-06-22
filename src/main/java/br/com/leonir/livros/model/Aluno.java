@@ -25,6 +25,7 @@ public class Aluno {
 	
 	@NotNull
 	@NotBlank
+	@Size(min = 11, max = 11, message = "O telefone deve conter 11 dígitos (DDD + número)")
 	private String telefone;
 	
 	@NotNull

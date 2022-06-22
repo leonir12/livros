@@ -37,26 +37,29 @@ public class AlunoController {
 		}
 		Livro livroSelecionado = new Livro();
 		livroSelecionado = livro.get();
+		Aluno aluno = new Aluno();
+		aluno.setLivro(livroSelecionado);
 		model.addAttribute("livro", livroSelecionado);
-		model.addAttribute("aluno", new Aluno());
+		model.addAttribute("aluno", aluno);
 		return "/form-cadastrar-aluno";
 	}
 	
-	@PostMapping("/salvar")
-	public String salvarAluno(
+	@PostMapping("/salvar/{id}")
+	public String salvarAluno( 
 				@Valid Aluno aluno, 				
-				BindingResult result, 
+				BindingResult result,
+				@PathVariable("id") long idLivro,
 				Model model,
 				RedirectAttributes attributes) {
-		//Optional<Livro> livroBanco = livroRepository.findById(idLivro);
-		//Livro livro = livroBanco.get();
+		Optional<Livro> livroBanco = livroRepository.findById(idLivro);
+		Livro livro = livroBanco.get();
 		if (result.hasErrors()) {
-			//aluno.setLivro(livro);
+			aluno.setLivro(livro);
 			attributes.addFlashAttribute("mensagem", "Ocorreu um erro!");
 			return "/form-cadastrar-aluno";
 		}
 		
-		//aluno.setLivro(livro);
+		aluno.setLivro(livro);
 		alunoRepository.save(aluno);
 		attributes.addFlashAttribute("mensagem", "Livro reservado com sucesso!");
 		return "redirect:/livros";
